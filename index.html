@@ -2,110 +2,572 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Elin's personal website for Data Science and Business Intelligence.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f8f5">
+  <meta name="description" content="Elin is a Data Science and Business Intelligence student at The Hang Seng University of Hong Kong.">
   <title>Elin | Data Science &amp; Business Intelligence</title>
-  <link rel="stylesheet" href="style.css">
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f6f8f5;
+      --white: #ffffff;
+      --ink: #17333a;
+      --muted: #4c666b;
+      --blue: #236b83;
+      --blue-deep: #174c61;
+      --mint: #dcece6;
+      --line: #cadbd7;
+      --accent: #d28453;
+      --content-width: 1120px;
+    }
+
+    /* Change colours here to adjust the look of the whole page. */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 6rem;
+    }
+
+    body {
+      margin: 0;
+      padding-top: 4.75rem;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    a {
+      color: var(--blue-deep);
+      text-underline-offset: 0.2em;
+    }
+
+    a:hover {
+      color: var(--blue);
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    .container {
+      width: min(var(--content-width), calc(100% - 3rem));
+      margin-inline: auto;
+    }
+
+    /* Adjust these section paddings to change the page's vertical spacing. */
+    .section {
+      padding-block: 6rem;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      z-index: 10;
+      padding: 0.65rem 1rem;
+      transform: translateY(-200%);
+      background: var(--ink);
+      color: var(--white);
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      z-index: 5;
+      border-bottom: 1px solid rgba(23, 51, 58, 0.12);
+      background: rgba(246, 248, 245, 0.96);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav-wrap {
+      display: flex;
+      min-height: 4.75rem;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .brand {
+      color: var(--ink);
+      font-size: 1.25rem;
+      font-weight: 750;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 650;
+      text-decoration: none;
+      transition: color 160ms ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--blue-deep);
+    }
+
+    .menu-toggle {
+      display: none;
+      min-width: 2.75rem;
+      min-height: 2.75rem;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: var(--white);
+      color: var(--ink);
+      cursor: pointer;
+      font: inherit;
+      font-size: 1.3rem;
+      line-height: 1;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding-block: clamp(6rem, 13vw, 11rem);
+      background:
+        radial-gradient(ellipse at 83% 18%, rgba(220, 236, 230, 0.92), transparent 34%),
+        linear-gradient(125deg, #f6f8f5 15%, #edf4f0 100%);
+    }
+
+    .hero::after {
+      position: absolute;
+      right: max(4vw, calc((100vw - var(--content-width)) / 2));
+      bottom: -7rem;
+      width: 21rem;
+      height: 21rem;
+      border: 1px solid rgba(35, 107, 131, 0.2);
+      border-radius: 50%;
+      content: "";
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 850px;
+    }
+
+    .eyebrow,
+    .section-kicker {
+      margin: 0 0 1rem;
+      color: var(--blue);
+      font-size: 0.78rem;
+      font-weight: 750;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1,
+    h2,
+    h3 {
+      line-height: 1.16;
+    }
+
+    h1 {
+      max-width: 12ch;
+      margin-bottom: 1.4rem;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(3.4rem, 8vw, 6.6rem);
+      font-weight: 500;
+      letter-spacing: -0.035em;
+    }
+
+    .hero-intro {
+      max-width: 640px;
+      margin-bottom: 2rem;
+      color: var(--muted);
+      font-size: clamp(1.08rem, 2vw, 1.28rem);
+    }
+
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      color: var(--blue-deep);
+      font-weight: 750;
+      text-decoration-thickness: 1px;
+    }
+
+    .text-link span {
+      display: inline-block;
+      transition: transform 160ms ease;
+    }
+
+    .text-link:hover span {
+      transform: translateX(4px);
+    }
+
+    .section-heading {
+      max-width: 680px;
+      margin-bottom: 2rem;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+      font-weight: 500;
+      letter-spacing: -0.025em;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-copy {
+      max-width: 670px;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .about-copy p:last-child {
+      margin-bottom: 0;
+    }
+
+    .experience-list {
+      display: grid;
+      gap: 0;
+      margin: 0;
+      padding: 0;
+      border-top: 1px solid var(--line);
+      list-style: none;
+    }
+
+    .experience-list li {
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    .experience-list strong {
+      display: block;
+      margin-bottom: 0.2rem;
+      color: var(--ink);
+    }
+
+    .interests-section {
+      background: var(--mint);
+    }
+
+    .interests-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 2.5rem;
+    }
+
+    .interest-card {
+      min-height: 205px;
+      padding: 1.6rem;
+      border: 1px solid rgba(23, 51, 58, 0.12);
+      background: rgba(255, 255, 255, 0.78);
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .interest-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 32px rgba(23, 51, 58, 0.1);
+    }
+
+    .interest-number {
+      display: block;
+      margin-bottom: 2.2rem;
+      color: var(--blue);
+      font-size: 0.78rem;
+      font-weight: 750;
+      letter-spacing: 0.1em;
+    }
+
+    .interest-card h3 {
+      margin-bottom: 0.4rem;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.55rem;
+      font-weight: 500;
+    }
+
+    .interest-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .contact-section {
+      padding-block: 6rem;
+      background: var(--blue-deep);
+      color: var(--white);
+    }
+
+    .contact-section .section-kicker {
+      color: #c6e2dc;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: end;
+    }
+
+    .contact-section .section-heading {
+      max-width: 540px;
+      margin-bottom: 0.8rem;
+    }
+
+    .contact-section p:not(.section-kicker) {
+      margin-bottom: 0;
+      color: #e0efec;
+    }
+
+    .email-link {
+      display: inline-block;
+      padding: 0.8rem 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      color: var(--white);
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 160ms ease, color 160ms ease;
+    }
+
+    .email-link:hover {
+      background: var(--white);
+      color: var(--blue-deep);
+    }
+
+    .site-footer {
+      padding-block: 1.2rem;
+      background: #123d4e;
+      color: #d6e7e3;
+      font-size: 0.88rem;
+    }
+
+    .site-footer p {
+      margin: 0;
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        width: min(var(--content-width), calc(100% - 2rem));
+      }
+
+      .section {
+        padding-block: 4.5rem;
+      }
+
+      .nav-wrap {
+        min-height: 4.25rem;
+      }
+
+      body {
+        padding-top: 4.25rem;
+      }
+
+      .menu-toggle {
+        display: inline-grid;
+        place-items: center;
+      }
+
+      .nav-links {
+        position: absolute;
+        top: calc(100% + 1px);
+        right: 0;
+        left: 0;
+        display: none;
+        align-items: stretch;
+        gap: 0;
+        padding: 0.5rem 1rem 1rem;
+        border-bottom: 1px solid var(--line);
+        background: var(--paper);
+      }
+
+      .nav-links.is-open {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .nav-links a {
+        display: block;
+        padding: 0.75rem 0;
+      }
+
+      .hero {
+        padding-block: 6rem;
+      }
+
+      .hero::after {
+        right: -10rem;
+      }
+
+      .about-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .interests-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .interest-card {
+        min-height: 0;
+      }
+
+      .interest-number {
+        margin-bottom: 1.25rem;
+      }
+
+      .contact-section {
+        padding-block: 4.5rem;
+      }
+
+      .email-link {
+        overflow-wrap: anywhere;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
   <header class="site-header">
-    <nav class="site-nav container" aria-label="Main navigation">
-      <!-- Change the site name here if you would like a different heading. -->
-      <a class="site-name" href="#top">Elin</a>
-      <ul class="nav-links">
-        <li><a href="#about">About Me</a></li>
-        <li><a href="#skills">Skills &amp; Interests</a></li>
-        <li><a href="#projects">Projects</a></li>
+    <nav class="container nav-wrap" aria-label="Main navigation">
+      <a class="brand" href="#home" aria-label="Elin, back to top">Elin</a>
+      <button class="menu-toggle" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-links">
+        <span aria-hidden="true">☰</span>
+      </button>
+      <ul class="nav-links" id="primary-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#interests">Interests</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </nav>
   </header>
 
   <main id="main-content">
-    <section class="hero" id="top" aria-labelledby="welcome-heading">
-      <div class="container hero-content">
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="container hero-inner">
         <p class="eyebrow">Data Science &amp; Business Intelligence</p>
-        <h1 id="welcome-heading">Hello, I’m Elin.</h1>
-        <p class="hero-intro">Welcome to my personal space, where I explore ideas, learn from data, and keep growing.</p>
-        <a class="button" href="#projects">See my projects</a>
+        <h1 id="hero-title">Curiosity is where I begin.</h1>
+        <p class="hero-intro">I’m Elin, a second-year student at The Hang Seng University of Hong Kong, exploring how data, mathematics, and thoughtful questions can help us understand the world.</p>
+        <a class="text-link" href="#about">A little more about me <span aria-hidden="true">→</span></a>
       </div>
     </section>
 
-    <section class="content-section" id="about" aria-labelledby="about-heading">
-      <div class="container narrow-content">
-        <p class="section-label">A little about me</p>
-        <h2 id="about-heading">Curious, thoughtful, and ready to learn</h2>
-        <p>I am passionate about mathematics. I am proactive and ambitious, and I enjoy finding clear ways to understand and communicate ideas.</p>
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="container about-grid">
+        <div>
+          <p class="section-kicker">About me</p>
+          <h2 class="section-heading" id="about-title">A student with a spirit of inquiry.</h2>
+        </div>
+        <div class="about-copy">
+          <p>I am a second-year student majoring in Data Science and Business Intelligence at The Hang Seng University of Hong Kong. I have a strong passion for learning and a spirit of inquiry, with a deep interest in mathematics.</p>
+          <p>I am diligent and eager to learn, and I am always willing to ask questions. I have been a member of my school’s peer-mentor organization for one year and have organised two events. I also serve as a floor ambassador of my residential college, where I have held two additional events.</p>
+          <ul class="experience-list" aria-label="Campus involvement">
+            <li><strong>Peer-mentor organization</strong>Member for one year; organised two events.</li>
+            <li><strong>Residential college</strong>Floor ambassador; held two events.</li>
+          </ul>
+        </div>
       </div>
     </section>
 
-    <section class="content-section tinted-section" id="skills" aria-labelledby="skills-heading">
+    <section class="section interests-section" id="interests" aria-labelledby="interests-title">
       <div class="container">
-        <p class="section-label">What I enjoy</p>
-        <h2 id="skills-heading">Skills &amp; Interests</h2>
-        <div class="interest-list">
-          <!-- Replace these items with your own skills or interests. -->
-          <article class="interest-item">
-            <h3>Cooking</h3>
-            <p>Creating, experimenting, and sharing good food.</p>
-          </article>
-          <article class="interest-item">
+        <p class="section-kicker">Outside the classroom</p>
+        <h2 class="section-heading" id="interests-title">Things I enjoy.</h2>
+        <div class="interests-grid">
+          <article class="interest-card">
+            <span class="interest-number" aria-hidden="true">01 / CREATE</span>
             <h3>Drawing</h3>
-            <p>Making time for visual ideas and creative practice.</p>
+            <p>A creative way to notice details and turn ideas into images.</p>
           </article>
-          <article class="interest-item">
-            <h3>Leadering</h3>
-            <p>Taking initiative and helping ideas move forward.</p>
+          <article class="interest-card">
+            <span class="interest-number" aria-hidden="true">02 / PLAY</span>
+            <h3>Playing the violin</h3>
+            <p>Making music through patience, practice, and expression.</p>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="content-section" id="projects" aria-labelledby="projects-heading">
-      <div class="container">
-        <p class="section-label">Things I am exploring</p>
-        <h2 id="projects-heading">Projects</h2>
-        <p class="section-intro">These sample cards are ready for you to edit with your own project details.</p>
-        <div class="project-grid">
-          <!-- Replace each project title and description with your own work. -->
-          <article class="project-card">
-            <p class="project-number">01</p>
-            <h3>Project title one</h3>
-            <p>Add a short description of a project, idea, or question you have explored.</p>
-            <a href="#contact">Ask me about this project</a>
-          </article>
-          <article class="project-card">
-            <p class="project-number">02</p>
-            <h3>Project title two</h3>
-            <p>Describe what you made, what you learned, or what you would like to try next.</p>
-            <a href="#contact">Ask me about this project</a>
-          </article>
-          <article class="project-card">
-            <p class="project-number">03</p>
-            <h3>Project title three</h3>
-            <p>Use this space for another project that shows your interests and growing skills.</p>
-            <a href="#contact">Ask me about this project</a>
+          <article class="interest-card">
+            <span class="interest-number" aria-hidden="true">03 / MAKE</span>
+            <h3>Cooking</h3>
+            <p>Enjoying the process of preparing and sharing food.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="contact-section" id="contact" aria-labelledby="contact-heading">
-      <div class="container contact-content">
-        <p class="section-label">Let’s connect</p>
-        <h2 id="contact-heading">Have a question or an idea?</h2>
-        <p>I would be happy to hear from you.</p>
-        <a class="email-link" href="mailto:elin006430@gmail.com">Email Elin at elin006430@gmail.com</a>
+    <section class="contact-section" id="contact" aria-labelledby="contact-title">
+      <div class="container contact-grid">
+        <div>
+          <p class="section-kicker">Contact</p>
+          <h2 class="section-heading" id="contact-title">Let’s start a conversation.</h2>
+          <p>I’d be glad to hear from you.</p>
+        </div>
+        <a class="email-link" href="mailto:elin006430@gmail.com">Email Elin: elin006430@gmail.com</a>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <p>&copy; 2026 Elin. Built with HTML and CSS.</p>
+      <p>Elin · Data Science &amp; Business Intelligence</p>
     </div>
   </footer>
+
+  <script>
+    const menuButton = document.querySelector('.menu-toggle');
+    const navigation = document.querySelector('#primary-links');
+
+    menuButton.addEventListener('click', () => {
+      const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!isExpanded));
+      menuButton.setAttribute('aria-label', isExpanded ? 'Open navigation menu' : 'Close navigation menu');
+      navigation.classList.toggle('is-open', !isExpanded);
+    });
+
+    navigation.addEventListener('click', (event) => {
+      if (event.target.closest('a')) {
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.setAttribute('aria-label', 'Open navigation menu');
+        navigation.classList.remove('is-open');
+      }
+    });
+  </script>
 </body>
 </html>
